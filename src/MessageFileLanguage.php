@@ -75,7 +75,6 @@ class MessageFileLanguage {
 			fwrite($fp, 'return ');
 			fwrite($fp, var_export($this->msg, true));
 			fwrite($fp, ";\n");
-			fwrite($fp, "?>\n");
 			
 			fclose($fp);
 			umask($old);
