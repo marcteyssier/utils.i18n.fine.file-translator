@@ -52,8 +52,24 @@ class MessageFileLanguage {
 			ksort($this->msg);
 			
 			$file = $this->folder."messages_".$this->language.".php";
-			
+
 			$old = umask(00002);
+
+			if (file_exists($file) && !is_writable($file)) {
+				throw new FileTranslatorException('Cannot write to file "'.$file.'".');
+			} elseif (!file_exists($file)) {
+				if (!is_dir($this->folder)) {
+					$result = mkdir($this->folder, 0775, true);
+					if (!$result) {
+						throw new FileTranslatorException('Cannot create directory "'.$this->folder.'".');
+					}
+				}
+				if (!is_writable($this->folder)) {
+					throw new FileTranslatorException('Cannot write to directory "'.$this->folder.'".');
+				}
+			}
+
+
 			$fp = fopen($file, "w");
 			fwrite($fp, "<?php\n");
 			fwrite($fp, 'return ');
