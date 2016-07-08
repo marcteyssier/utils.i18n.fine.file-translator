@@ -163,7 +163,7 @@ class FileTranslator implements TranslatorInterface, EditTranslationInterface  {
 		foreach ($languages as $language) {
 			$this->getTranslationsForLanguage($language);
 		}
-		return json_encode($this->messages);
+		return $this->messages;
 	}
 	
 	/**
