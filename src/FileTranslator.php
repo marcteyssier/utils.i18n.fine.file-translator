@@ -80,7 +80,7 @@ class FileTranslator implements TranslatorInterface, EditTranslationInterface  {
 	 */
 	private function getPath() {
 		if(strpos($this->i18nMessagePath, '/') === 0 || strpos($this->i18nMessagePath, ':/') === 1) {
-			return $this->i18nMessagePath;;
+			return $this->i18nMessagePath;
 		}
 		return ROOT_PATH.$this->i18nMessagePath;
 	}
@@ -113,7 +113,7 @@ class FileTranslator implements TranslatorInterface, EditTranslationInterface  {
 			$lang = $languageDetectionInterface->getLanguage();
 		}
 		//Load the main file
-		if($this->msg[$lang] === null) {
+		if(!isset($this->msg[$lang])) {
 			$this->retrieveMessages($lang);
 		}
 		if (isset($this->msg[$lang][$message])) {
